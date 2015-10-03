@@ -37,13 +37,13 @@ type Server struct {
 
 func NewServer() (*Server, error) {
     s := Server{
-        Port: "5080",
+        Port: "8080",
         Routes: make([]Route, 1, 6),
     }
     
     s.Routes = append(s.Routes, Route{"/v2/catalog", api.HandleCatalog, []string{"GET"}})
     s.Routes = append(s.Routes, Route{`/v2/service_instances/{colon_instance_id}`, 
-        api.HandleServiceInstance, []string{"GET", "PUT", "DELETE"}})
+        api.HandleServiceInstance, []string{"PUT", "PATCH", "DELETE"}})
     s.Routes = append(s.Routes, Route{`/v2/service_instances/{colon_instance_id}/service_bindings/colon_binding_id`, 
         api.HandleBinding, []string{"PUT", "DELETE"}}) 
     s.Routes = append(s.Routes, Route{"/sayhello", func (w http.ResponseWriter, r *http.Request){

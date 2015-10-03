@@ -15,18 +15,21 @@ package main
 
 import (
     _ "fmt"
-    _ "os"
+    "os"
     _ "errors"
     _ "flag"
     
     "server"
-    
 )
 
 func main() {
+    port := os.Getenv("PORT")
     s, err := server.NewServer()
     if err != nil {
         return
+    }
+    if port != "" {
+        s.Port = port
     }
     s.Start()
 }

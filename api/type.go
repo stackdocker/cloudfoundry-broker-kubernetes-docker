@@ -13,10 +13,36 @@ limitations under the License.
 
 package api 
 
-type MetadataKey struct {
-    Id              string    `json:",inline" yaml:",inline"`
-    Name            string 
-    Description     string 
+type InstancePrevious struct {
+    Plan                InstancePlan            `json:",inline" yaml:",inline"`
+    OrganizationGuid    string                  `json:"organization_id,omitempty" yaml:"organization_id,omitempty"`
+    SpaceGuid           string                  `json:"space_id,omitempty" yaml:"space_id,omitempty"`
+}
+
+type InstanceUpdation struct {
+    Id                  string                  `json:"-" yaml:"-"`
+    Current             InstancePlan            `json:",inline" yaml:",inline"`                    
+    Parameters          map[string]interface{}  `json:"parameters,omitempty" yaml:"parameters,omitempty"`
+    Previous            InstancePrevious        `json:"previous_values,omitempty" yaml:"previous_values,omitempty"`
+}
+
+type InstanceDashboard struct {
+    DashboardUrl        string                  `json:"dashboard_url,omitempty" yaml:"dashboard_url,omitempty"`
+}
+
+type InstancePlan struct {
+    ServiceId           string                  `json:"service_id" yaml:"service_id"`
+    PlanId              string                  `json:"plan_id" yaml:"plan_id"`
+}
+
+type ServiceInstance struct {
+    Id                  string                  `json:"-" yaml:"-"`
+    //InstancePlan        InstancePlan            `json:",inline"`                    
+    ServiceId           string                  `json:"service_id" yaml:"service_id"`
+    PlanId              string                  `json:"plan_id" yaml:"plan_id"`
+    OrganizationGuid    string                  `json:"organization_guid" yaml:"organization_guid"`
+    SpaceGuid           string                  `json:"space_guid" yaml:"space_guid"`
+    Parameters          map[string]interface{}  `json:"parameters,omitempty" yaml:"parameters,omitempty"`
 }
 
 type DashboardClientV2 struct {
@@ -72,7 +98,7 @@ type ServicePlanV2 struct {
     Id              string              `json:"id" yaml:"id"`
     Name            string              `json:"name" yaml:"name"`
     Description     string              `json:"description" yaml:"description"`
-    Metadata        PlanMetadata        `json:"metadata" yaml:"metadata"`
+    Metadata        PlanMetadata        `json:"metadata,omitempty" yaml:"metadata,omitempty"`
     Free            bool                `json:"free,omitempty" yaml:"free,omitempty"`
 }
 
@@ -103,7 +129,7 @@ type ServiceV2 struct {
     Description     string                  `json:"description" yaml:"description"`
     Bindable        bool                    `json:"bindable" yaml:"bindable"`
     Tags            []string                `json:"tags,omitempty" yaml:"tags,omitempty"`
-    Metadata        []ServiceMetadata       `json:"metadata,inline" yaml:"metadata,inline"`
+    Metadata        []ServiceMetadata       `json:"metadata,omitempty" yaml:"metadata,omitempty"`
     Requires        string                  `json:"requires,omitempty" yaml:"requires,omitempty"`
     PlanUpdatable   bool                    `json:"plan_updateable,omitempty" yaml:"plan_updateable,omitempty"`
     Plans           []ServicePlanV2         `json:"plans" yaml:"plans"`

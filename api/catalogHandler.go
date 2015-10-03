@@ -16,6 +16,8 @@ package api
 import (
     "net/http"
     "encoding/json"
+    "io"
+    "bytes"
     "log"
 )
 
@@ -44,9 +46,20 @@ var catalog *CatalogV2 = &CatalogV2 {
                 sentinel nodes`,
             Bindable: false,
             Tags: []string{"redis", "cluster", "k-v", "database"},
+            Plans: []ServicePlanV2 {
+                ServicePlanV2 {
+                    Id: "8cfbbaf5-efdb-41c1-89ab-f797185f7818",
+                    Name: "demo",
+                    Description: "this is a redic cluster demo",
+                },
+            },
         },
     },
 }
+
+/*
+    curl -H "X-Broker-API-Version: 2.6" http://username:password@broker-url/v2/catalog
+*/
 
 func HandleCatalog(w http.ResponseWriter, r *http.Request) {
     if r.Method != "GET" {
@@ -63,6 +76,14 @@ func HandleCatalog(w http.ResponseWriter, r *http.Request) {
         return
     }
     
-    enc := json.NewEncoder(w)
-    enc.Encode(catalog)
+    //enc := json.NewEncoder(w)
+    //enc.Encode(catalog)
+    js, err := json.Marshal(catalog)
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+    w.Header().Set("Content-Type", "application/json")
+    //w.Write(js)
+    io.Copy(w, bytes.NewBuffer(js))
 }
