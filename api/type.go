@@ -98,7 +98,7 @@ type ServicePlanV2 struct {
     Id              string              `json:"id" yaml:"id"`
     Name            string              `json:"name" yaml:"name"`
     Description     string              `json:"description" yaml:"description"`
-    Metadata        PlanMetadata        `json:"metadata,omitempty" yaml:"metadata,omitempty"`
+    Metadata        *PlanMetadata       `json:"metadata,omitempty" yaml:"metadata,omitempty"`
     Free            bool                `json:"free,omitempty" yaml:"free,omitempty"`
 }
 
@@ -133,7 +133,7 @@ type ServiceV2 struct {
     Requires        string                  `json:"requires,omitempty" yaml:"requires,omitempty"`
     PlanUpdatable   bool                    `json:"plan_updateable,omitempty" yaml:"plan_updateable,omitempty"`
     Plans           []ServicePlanV2         `json:"plans" yaml:"plans"`
-    DashboardClient DashboardClientV2       `json:"dashboard_client,omitempty" yaml:"dashboard_client,omitempty"`  
+    DashboardClient *DashboardClientV2      `json:"dashboard_client,omitempty" yaml:"dashboard_client,omitempty"`  
 }
 
 type CatalogV2 struct {
