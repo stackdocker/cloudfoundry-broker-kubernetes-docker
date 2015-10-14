@@ -1,5 +1,5 @@
 /*
-Copyright 2014 The Kubernetes Authors All rights reserved.
+Copyright 2015 All rights reserved.
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -41,16 +41,17 @@ var catalog *CatalogV2 = &CatalogV2 {
         ServiceV2 {
             Id: "9c372bbc-1e7b-472b-bcb6-eeda5b21eb35",    
             Name: "redis-cluster-managed-by-kubernetes",
-            Description: `The Redis is a high reliable and scalable cluster deployed upon 
-                Kubernetes v1, it failovers in master/slave, and load balancing with mutiple 
-                sentinel nodes`,
+            Description: `The Redis is a high reliable and scalable cluster deployed upon` + 
+                ` Kubernetes v1, it failovers in master/slave, and load balancing with multiple` + 
+                ` sentinel nodes`,
             Bindable: false,
             Tags: []string{"redis", "cluster", "k-v", "database"},
             Plans: []ServicePlanV2 {
                 ServicePlanV2 {
                     Id: "8cfbbaf5-efdb-41c1-89ab-f797185f7818",
                     Name: "demo",
-                    Description: "this is a redic cluster demo",
+                    Description: "this is a redis cluster demo",
+                    Free: true,
                 },
             },
         },

@@ -11,12 +11,22 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package api
-
+package main
 import (
-    "net/http"
+    "fmt"
+    "gopkg.in/redis.v3"
 )
 
-func HandleBinding(w http.ResponseWriter, r *http.Request) {
-    
+// The Sentinel address is orchestrated by Kubuernetes, e.g. $ kubectl get endpoints
+// Should using your actual env value
+func main() {
+    client := redis.NewFailoverClient(&redis.FailoverOptions{
+        MasterName: "mymaster",
+        SentinelAddrs: []string{"172.31.33.2:26379","172.31.33.3:26379",
+            "172.31.75.4:26379"},
+    })
+    cmd := client.Ping()
+    if cmd != nil {
+        fmt.Println(cmd)
+    }
 }
