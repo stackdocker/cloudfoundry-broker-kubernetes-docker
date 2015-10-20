@@ -24,12 +24,6 @@ import (
     "bytes"
 )
 
-var emptyJO []byte = []byte("{}")
-
-type ServiceCatalog struct {
-    instance    ServiceInstance
-}
-
 const (
     ORGID = "a924baea-363a-457e-8708-0eda152e76c5"
     SPACEID = "1fde0510-cc7e-42c0-8321-1505d51f0c29"
@@ -37,6 +31,12 @@ const (
     SERVICEID = "9c372bbc-1e7b-472b-bcb6-eeda5b21eb35"
     PLANID = "8cfbbaf5-efdb-41c1-89ab-f797185f7818"
 )
+
+var EmptyJData []byte = []byte("{}")
+
+type ServiceCatalog struct {
+    instance    ServiceInstance
+}
 
 /*
 curl -i http://127.0.0.1:8080/v2/service_instances/00000000-0000-0000-0000-000000000000 -d '{"organization_guid": "a924baea-363a-457e-8708-0eda152e76c5", "plan_id": "8cfbbaf5-efdb-41c1-89ab-f797185f7818", "service_id": "9c372bbc-1e7b-472b-bcb6-eeda5b21eb35", "space_guid": "1fde0510-cc7e-42c0-8321-1505d51f0c29", "parameters": {"parameter1": 1, "parameter2": "value"}}' -X PUT -H "X-Broker-API-Version: 2.6" -H "Content-Type: application/json"; echo
@@ -80,7 +80,7 @@ func (h *ServiceCatalog) Provision(w http.ResponseWriter, r *http.Request) {
 	//if err != nil {
 	//    http.Error(w, "Failed to marshal empty json object", http.StatusInternalServerError)
 	//}
-	w.Write(emptyJO)
+	w.Write(EmptyJData)
 }
 
 func (h *ServiceCatalog) UpdateInstance(w http.ResponseWriter, r *http.Request) {

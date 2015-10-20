@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package api 
+package api
 
 type InstancePrevious struct {
     Plan                InstancePlan            `json:",inline" yaml:",inline"`
@@ -138,4 +138,22 @@ type ServiceV2 struct {
 
 type CatalogV2 struct {
     Services        []ServiceV2             `json:"services" yaml:"services"`
+}
+
+/*
+* binding
+*/
+
+type ServiceBinding struct {
+	Id                 string                   `json:"-" yaml:"-"`
+	InstanceId         string                   `json:"-" yaml:"-"`
+	ServiceId          string                   `json:"service_id" yaml:"service_id"`
+	PlanId             string                   `json:"plan_id" yaml:"plan_id"`
+	AppGuid            string                   `json:"app_guid,omitempty" yaml:"app_guid,omitempty"`
+	Parameters         map[string]interface{}   `json:"parameters,omitempty" yaml:"parameters,omitempty"`
+}
+
+type ServiceBound struct {
+    Credentials        map[string]interface{}   `json:"credentials,omitempty" yaml:"credentials,omitempty"`
+    SyslogDrainUrl     string                   `json:"syslog_drain_url,omitempty" yaml:"syslog_drain_url,omitempty"`
 }
