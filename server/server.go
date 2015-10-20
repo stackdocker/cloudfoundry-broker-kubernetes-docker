@@ -17,10 +17,9 @@ import (
     "fmt"
     _ "os"
     "net/http"
-    "github.com/gorilla/mux"
     _ "errors"
     "log"
-    
+    "github.com/gorilla/mux"
     "api"
 )
 
@@ -37,18 +36,18 @@ type Server struct {
 
 func NewServer() (*Server, error) {
     s := Server{
-        Port: "8080",
-        Routes: make([]Route, 1, 6),
+        Port: "80",
+        Routes: make([]Route, 0, 6),
     }
     
     s.Routes = append(s.Routes, Route{"/v2/catalog", api.HandleCatalog, []string{"GET"}})
     s.Routes = append(s.Routes, Route{`/v2/service_instances/{colon_instance_id}`, 
         api.HandleServiceInstance, []string{"PUT", "PATCH", "DELETE"}})
-    s.Routes = append(s.Routes, Route{`/v2/service_instances/{colon_instance_id}/service_bindings/colon_binding_id`, 
+    s.Routes = append(s.Routes, Route{`/v2/service_instances/{colon_instance_id}/service_bindings/{colon_binding_id}`, 
         api.HandleBinding, []string{"PUT", "DELETE"}}) 
     s.Routes = append(s.Routes, Route{"/sayhello", func (w http.ResponseWriter, r *http.Request){
-        fmt.Fprintf(w, "hello world")
-    }, []string{"GET"}})
+            fmt.Fprintf(w, "hello world")
+        }, []string{"GET"}})
     
     return &s, nil
 }
