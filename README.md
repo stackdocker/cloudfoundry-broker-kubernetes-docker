@@ -20,7 +20,7 @@ __Run in debug mode__
 
 Like:
 
->`$ go main.go --redis-addr 192.168.0.1:6379 --sentinel-addrs 192.168.0.11:26379,192.168.0.12:26379`
+>`$ go run main.go --redis-addr 192.168.0.1:6379 --sentinel-addrs 192.168.0.11:26379,192.168.0.12:26379`
 
 __Test with curl__
 
