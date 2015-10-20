@@ -18,11 +18,22 @@ import (
     "os"
     _ "errors"
     _ "flag"
-    
+    "github.com/spf13/pflag"
+    "api"    
     "server"
 )
 
 func main() {
+    pflag.StringVar(&api.RedisConf.Network, "redis-net", "tcp", "tcp or unix")
+    pflag.StringVar(&api.RedisConf.Address, "redis-addr", ":6379", "ip:port")
+    pflag.StringVar(&api.RedisConf.Password, "redis-pass", "", "Redis password")
+    pflag.IntVar(&api.RedisConf.Db, "redis-db", 0, "Redis db")
+    pflag.StringVar(&api.SentinelConf.MasterName, "master-name", "mymaster", 
+        "Redis Sentinel master name")
+    pflag.StringSliceVar(&api.SentinelConf.SentinelAddrs, "sentinel-addrs", 
+        []string{":26379"}, "Sentinel failover addresses")
+    pflag.Parse()
+
     port := os.Getenv("PORT")
     s, err := server.NewServer()
     if err != nil {
