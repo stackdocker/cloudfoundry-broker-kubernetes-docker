@@ -44,7 +44,7 @@ var catalog *CatalogV2 = &CatalogV2 {
             Description: `The Redis is a high reliable and scalable cluster deployed upon` + 
                 ` Kubernetes v1, it failovers in master/slave, and load balancing with multiple` + 
                 ` sentinel nodes`,
-            Bindable: false,
+            Bindable: true,
             Tags: []string{"redis", "cluster", "k-v", "database"},
             Plans: []ServicePlanV2 {
                 ServicePlanV2 {
