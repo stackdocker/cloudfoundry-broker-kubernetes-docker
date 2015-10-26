@@ -20,6 +20,7 @@ import (
     _ "errors"
     _ "os"
     "log"
+    "strings"
     //log "github.com/Sirupsen/logrus"
     "github.com/Sirupsen/logrus"
     "github.com/gorilla/mux"
@@ -111,7 +112,11 @@ type RedisBinder struct {
 func (b *RedisBinder) Do(body io.ReadCloser) {
     b.Binder.Do(body)
     credentials := &RedisConf
-    b.Binder.Bound.Credentials = structs.Map(credentials)
+    m := structs.Map(credentials)
+    b.Binder.Bound.Credentials = make(map[string]interface{}, len(m))
+    for k, v := range m {
+        b.Binder.Bound.Credentials[strings.ToLower(k)] = v
+    }
 }
 
 type SentinelBinder struct {
@@ -123,7 +128,11 @@ func (b *SentinelBinder) Do(body io.ReadCloser) {
     credentials := &SentinelConf
     credentials.Password = RedisConf.Password
     credentials.Db = int64(RedisConf.Db)
-    b.Binder.Bound.Credentials = structs.Map(credentials)
+    m := structs.Map(credentials)
+    b.Binder.Bound.Credentials = make(map[string]interface{}, len(m))
+    for k, v := range m {
+        b.Binder.Bound.Credentials[strings.ToLower(k)] = v
+    }
 }
 
 func (binder *RedisBinder) bind(w http.ResponseWriter, r *http.Request) {
