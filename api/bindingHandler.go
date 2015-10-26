@@ -157,7 +157,7 @@ func HandleBinding(w http.ResponseWriter, r *http.Request) {
     vars := mux.Vars(r)
     instanceId := vars["colon_instance_id"]
     bindingId := vars["conon_binding_id"]
-    /*
+    
     sentinelbinder := &SentinelBinder {
         Binder : NewBinder(instanceId, bindingId),
     }
@@ -174,7 +174,7 @@ func HandleBinding(w http.ResponseWriter, r *http.Request) {
     } else {
         log.Print("not implemented")
     }
-    */
+    /*
     redisbinder := &RedisBinder {
         Binder : NewBinder(instanceId, bindingId),
     }
@@ -191,5 +191,5 @@ func HandleBinding(w http.ResponseWriter, r *http.Request) {
     } else {
         log.Print("not implemented")
     }
-    
+    */
 }
