@@ -48,7 +48,7 @@ var catalog *CatalogV2 = &CatalogV2 {
             Tags: []string{"redis", "cluster", "k-v", "database"},
             Plans: []ServicePlanV2 {
                 ServicePlanV2 {
-                    Id: "8cfbbaf5-efdb-41c1-89ab-f797185f7818",
+                    Id: "c01bdc18-c627-47a0-a60d-3da4fe4689b8",
                     Name: "demo",
                     Description: "this is a redis cluster demo",
                     Free: true,
