@@ -40,7 +40,7 @@ var catalog *CatalogV2 = &CatalogV2 {
     Services : []ServiceV2 {
         ServiceV2 {
             Id: "9026d4a7-ee7e-4b57-a4e1-032e0262d126",    
-            Name: "redis-cluster-managed-by-kubernetes",
+            Name: "redis-cluster-managed",
             Description: `The Redis is a high reliable and scalable cluster deployed upon` + 
                 ` Kubernetes v1, it failovers in master/slave, and load balancing with multiple` + 
                 ` sentinel nodes`,
